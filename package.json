@@ -1,0 +1,14 @@
+{
+  "name": "web_crawler",
+  "version": "1.0.0",
+  "description": "A web Puppeteer web scraper written in Typescript",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Travis Bennett",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
+}
