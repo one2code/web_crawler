@@ -1,13 +1,14 @@
-import { test, expect } from '@jest/globals';
-import {normalizeUrl} from './crawl'
+import { test, expect } from "@jest/globals";
+import { normalizeUrl } from "./crawl";
 
-
-test('normalizeUrl should remove trailing slash', () => {
-    const url = 'https://www.example.com/';
-    expect(normalizeUrl(url)).toBe('https://www.example.com');
+test("remove trailing slash from url", () => {
+	expect(normalizeUrl("https://example.com/")).toBe("https://example.com");
 });
 
-test('normalizeUrl should return the same url for https and http', () => {
-    const http = 'http://www.example.com';
-    expect(normalizeUrl(http)).toBe('https://www.example.com');
-})
+test("convert http to https", () => {
+	expect(normalizeUrl("http://example.com")).toBe("https://example.com");
+});
+
+test("handles mixed cases", () => {
+	expect(normalizeUrl("http://eXaMPle.com")).toBe("http://example.com");
+});
