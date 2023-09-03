@@ -23,11 +23,17 @@ test("handle no protocol", () => {
 	expect(normalizeUrl("example.com")).toBe("https://example.com");
 });
 
-test('handle URL fragments', () => {
-    expect(normalizeUrl("https://example.com/#section")).toBe("https://example.com/#section");
-})
+test("handle URL fragments", () => {
+	expect(normalizeUrl("https://example.com/#section")).toBe(
+		"https://example.com/#section"
+	);
+});
 
-test('throw error for invalid URLs', () => {
-    expect(normalizeUrl("not a url")).toThrow("Invalid URL");
-})
+test("throw error for invalid URLs", () => {
+	expect(() => normalizeUrl("not a url")).toThrow("Invalid URL");
+});
+
+test("handle subdomain", () => {
+	expect(normalizeUrl("https://sub.example.com")).toBe("https://sub.example.com")});
+
 
