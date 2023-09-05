@@ -12,7 +12,7 @@ export function normalizeUrl(url: string): string {
 	}
 
 	url = url.toLowerCase();
-	url = url.replace(/\/$/, "");
+	url = url.replace(/\/+$/, "");
 
 	try {
 		new URL(url);

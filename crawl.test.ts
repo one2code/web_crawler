@@ -5,6 +5,10 @@ test("remove trailing slash from url", () => {
 	expect(normalizeUrl("https://example.com/")).toBe("https://example.com");
 });
 
+test("remove multiple trailing slashes from url", () => {
+	expect(normalizeUrl("https://example.com//")).toBe("https://example.com");
+});
+
 test("convert http to https", () => {
 	expect(normalizeUrl("http://example.com")).toBe("https://example.com");
 });
@@ -34,6 +38,7 @@ test("throw error for invalid URLs", () => {
 });
 
 test("handle subdomain", () => {
-	expect(normalizeUrl("https://sub.example.com")).toBe("https://sub.example.com")});
-
-
+	expect(normalizeUrl("https://sub.example.com")).toBe(
+		"https://sub.example.com"
+	);
+});
