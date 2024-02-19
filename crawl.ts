@@ -1,3 +1,10 @@
+import { JSDOM } from "jsdom";
+(async () => {
+	const dom = await JSDOM.fromURL('https://boot.dev');
+	dom.window.document.querySelectorAll("a");
+})();
+
+
 export function normalizeUrl(url: string): string {
 	if (!url || typeof url !== "string" || url.length < 5) {
 		throw new Error(`Invalid URL ${url}`);
@@ -21,4 +28,16 @@ export function normalizeUrl(url: string): string {
 	}
 
 	return url;
+}
+
+function getUrlsFromHTML(htmlBody: string, baseUrl: string): string[] {
+	const dom = new JSDOM(htmlBody);
+	const urls: string[] = [];
+	dom.window.document.querySelectorAll("a").forEach((a) => {
+		const href = a.getAttribute("href");
+		if (href) {
+			urls.push(normalizeUrl(new URL(href, baseUrl).toString()));
+		}
+	});
+	return urls;
 }
