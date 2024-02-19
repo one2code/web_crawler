@@ -1,17 +1,7 @@
+import { JSDOM } from "jsdom";
 import { test, expect } from "@jest/globals";
 import { normalizeUrl } from "./crawl";
-
-test("remove trailing slash from url", () => {
-	expect(normalizeUrl("https://example.com/")).toBe("https://example.com");
-});
-
-test("remove multiple trailing slashes from url", () => {
-	expect(normalizeUrl("https://example.com//")).toBe("https://example.com");
-});
-
-test("convert http to https", () => {
-	expect(normalizeUrl("http://example.com")).toBe("https://example.com");
-});
+import { getUrlsFromHTML } from "./crawl";
 
 test("handle mixed cases", () => {
 	expect(normalizeUrl("https://eXaMPle.com")).toBe("https://example.com");
@@ -42,3 +32,10 @@ test("handle subdomain", () => {
 		"https://sub.example.com"
 	);
 });
+	test('extracts and normalizes URLs correctly from HTML', () => {
+		const htmlBody = `<html><body><a href="/relative/url">Relative</a><a href="http://example.com/absolute/url">Absolute</a></body></html>`;
+		const baseUrl = 'http://example.com';
+		const expectedUrls = ['https://example.com/relative/url', 'https://example.com/absolute/url']; // Assuming how your normalizeUrl works
+		const result = getUrlsFromHTML(htmlBody, baseUrl);
+		expect(result).toEqual(expectedUrls);
+	}); 

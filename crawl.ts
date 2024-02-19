@@ -1,8 +1,8 @@
 import { JSDOM } from "jsdom";
-(async () => {
+beforeAll(async () => {
 	const dom = await JSDOM.fromURL('https://boot.dev');
 	dom.window.document.querySelectorAll("a");
-})();
+});
 
 
 export function normalizeUrl(url: string): string {
@@ -30,7 +30,7 @@ export function normalizeUrl(url: string): string {
 	return url;
 }
 
-function getUrlsFromHTML(htmlBody: string, baseUrl: string): string[] {
+export function getUrlsFromHTML(htmlBody: string, baseUrl: string): string[] {
 	const dom = new JSDOM(htmlBody);
 	const urls: string[] = [];
 	dom.window.document.querySelectorAll("a").forEach((a) => {
