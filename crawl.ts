@@ -1,6 +1,6 @@
 import { JSDOM } from "jsdom";
 beforeAll(async () => {
-	const dom = await JSDOM.fromURL('https://boot.dev');
+	const dom = await JSDOM.fromURL("https://example.com");
 	dom.window.document.querySelectorAll("a");
 });
 
@@ -16,6 +16,9 @@ export function normalizeUrl(url: string): string {
 
 	if (url.startsWith("http://")) {
 		url = url.replace("http://", "https://");
+	}
+	if (url.startsWith("/")) {
+		throw new Error(`Invalid URL ${url}`);
 	}
 
 	url = url.toLowerCase();
@@ -41,3 +44,4 @@ export function getUrlsFromHTML(htmlBody: string, baseUrl: string): string[] {
 	});
 	return urls;
 }
+
